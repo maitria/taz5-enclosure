@@ -21,19 +21,26 @@ module ring_hole(cable_diameter, width) {
   straight_hole(cable_diameter, width);
 }
 
-module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
-  translate([-cable_diameter/2 - screw_head_height, -smidge, -(smidge + screw_head_height)]) 
-    cube([cable_diameter + 2 * screw_head_height, 2*smidge + width, smidge + screw_head_height]);
-}
-
 module straight_sides(cable_diameter, screw_head_height, width) {
-  translate([-cable_diameter/2 - screw_head_height, 0, 0]) 
-    cube([cable_diameter + 2 * screw_head_height, width, cable_diameter/2]);
+  wall_height = cable_diameter/2;
+  arch_width = cable_diameter + 2*screw_head_height;
+  adjust_for_width = -.5 * arch_width;
+  translate([adjust_for_width, 0, 0]) 
+    cube([arch_width, width, wall_height]);
 }
 
 module straight_hole(cable_diameter, width) {
-  translate([-cable_diameter/2, -smidge, -1]) 
-    cube([cable_diameter, 2*smidge + width, cable_diameter/2 + 1]);
+  wall_height = cable_diameter/2;
+  arch_width = cable_diameter;
+  adjust_for_width = -.5 * arch_width;
+  grow = 2*smidge;
+  translate([adjust_for_width, -.5*grow, -grow]) 
+    cube([arch_width, grow + width, wall_height + grow]);
+}
+
+module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
+  translate([-cable_diameter/2 - screw_head_height, -smidge, -(smidge + screw_head_height)]) 
+    cube([cable_diameter + 2 * screw_head_height, 2*smidge + width, smidge + screw_head_height]);
 }
 
 module base(cable_diameter, screw_head_height, screw_head_diameter, width) {
