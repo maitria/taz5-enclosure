@@ -5,10 +5,14 @@ module cylinder_part_of_arch(wall_height, diameter, grow, width) {
     cylinder(d = diameter, h = grow + width);
 }
 
-module arch(wall_height, diameter, grow, width, adjust_for_width) {
-  cylinder_part_of_arch(wall_height, diameter, grow, width);
+module straight_sides_of_arch(wall_height, diameter, grow, width, adjust_for_width) {
   translate([adjust_for_width, -.5*grow, -grow]) 
     cube([diameter, width + grow, wall_height + grow]);
+}
+
+module arch(wall_height, diameter, grow, width, adjust_for_width) {
+  cylinder_part_of_arch(wall_height, diameter, grow, width);
+  straight_sides_of_arch(wall_height, diameter, grow, width, adjust_for_width);
 }
 
 module hollow_arch(cable_diameter, screw_head_height, width) {
