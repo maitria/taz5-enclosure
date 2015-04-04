@@ -12,7 +12,7 @@ module outer_ring(cable_diameter, screw_head_height, width) {
   arch(diameter, wall_height, grow, width);
 }
 
-module ring_hole(cable_diameter, screw_head_height, width) {
+module ring_hole(cable_diameter, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter;
   grow = 2*smidge;
@@ -50,7 +50,7 @@ module u_bracket(cable_diameter, screw_head_height, screw_head_diameter) {
       base(cable_diameter, screw_head_height, screw_head_diameter, width);
     }
     union() {
-      ring_hole(cable_diameter, screw_head_height, width);
+      ring_hole(cable_diameter, width);
       straight_hole(cable_diameter, width);
     }
     open_bottom_of_ring(cable_diameter, screw_head_height, width);
