@@ -9,13 +9,13 @@ module arch(wall_height, diameter, grow, width, adjust_for_width) {
 
 module hollow_arch(cable_diameter, screw_head_height, width) {
   difference() {
-    outer_ring(cable_diameter, screw_head_height, width);
+    outer_arch(cable_diameter, screw_head_height, width);
     waste_in_ring(cable_diameter, width);
     waste_bottom_of_ring(cable_diameter, screw_head_height, width);
   }
 }
 
-module outer_ring(cable_diameter, screw_head_height, width) {
+module outer_arch(cable_diameter, screw_head_height, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter + (2 * screw_head_height);
   grow = 0;
