@@ -1,5 +1,5 @@
 
-module u_bracket(cable_diameter, thickness = 3, screw_head_diameter = 9) {
+module u_bracket(cable_diameter, thickness = 4, screw_head_diameter = 9) {
 	width = screw_head_diameter + 2 * thickness;
 	difference() {
 		union() {
