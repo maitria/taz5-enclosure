@@ -5,14 +5,14 @@ module cylinder_part_of_arch(wall_height, diameter, grow, width) {
     cylinder(d = diameter, h = grow + width);
 }
 
-module straight_sides_of_arch(wall_height, diameter, grow, width, adjust_for_width) {
-  translate([adjust_for_width, -.5*grow, -grow]) 
+module straight_sides_of_arch(wall_height, diameter, grow, width) {
+  translate([-diameter/2, -.5*grow, -grow]) 
     cube([diameter, width + grow, wall_height + grow]);
 }
 
-module arch(wall_height, diameter, grow, width, adjust_for_width) {
+module arch(wall_height, diameter, grow, width) {
   cylinder_part_of_arch(wall_height, diameter, grow, width);
-  straight_sides_of_arch(wall_height, diameter, grow, width, adjust_for_width);
+  straight_sides_of_arch(wall_height, diameter, grow, width);
 }
 
 module hollow_arch(cable_diameter, screw_head_height, width) {
@@ -27,16 +27,14 @@ module outer_arch(cable_diameter, screw_head_height, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter + (2 * screw_head_height);
   grow = 0;
-  adjust_for_width = -.5*diameter;
-  arch(wall_height, diameter, grow, width, adjust_for_width);
+  arch(wall_height, diameter, grow, width);
 }
 
 module waste_in_ring(cable_diameter, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter;
   grow = 2*smidge;
-  adjust_for_width = -.5*diameter;
-  arch(wall_height, diameter, grow, width, adjust_for_width);
+  arch(wall_height, diameter, grow, width);
 }
 
 module waste_bottom_of_ring(cable_diameter, screw_head_height, width) {
