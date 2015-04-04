@@ -1,8 +1,12 @@
 smidge = 0.5;
 
-module arch(wall_height, diameter, grow, width, adjust_for_width) {
+module cylinder_part_of_arch(wall_height, diameter, grow, width) {
   translate([0, -.5*grow, wall_height]) rotate([-90, 0, 0]) 
     cylinder(d = diameter, h = grow + width);
+}
+
+module arch(wall_height, diameter, grow, width, adjust_for_width) {
+  cylinder_part_of_arch(wall_height, diameter, grow, width);
   translate([adjust_for_width, -.5*grow, -grow]) 
     cube([diameter, width + grow, wall_height + grow]);
 }
