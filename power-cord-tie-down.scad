@@ -13,13 +13,6 @@ module ring_hole(cable_diameter, screw_head_height, width) {
     cylinder(d = cable_diameter, h = 2*smidge + width);
 }
 
-module entire_ring(cable_diameter, screw_head_height, width) {
-  difference() {
-    outer_ring(cable_diameter, screw_head_height, width);
-    inner_ring(cable_diameter, screw_head_height, width);
-  }
-}
-
 module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
   translate([-cable_diameter/2 - screw_head_height, -smidge, -(smidge + screw_head_height)]) 
     cube([cable_diameter + 2 * screw_head_height, 2*smidge + width, smidge + screw_head_height]);
