@@ -9,34 +9,20 @@ module outer_ring(cable_diameter, screw_head_height, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter + (2 * screw_head_height);
   grow = 0;
+  adjust_for_width = -.5*diameter;
   arch(diameter, wall_height, grow, width);
-  straight_sides(cable_diameter, screw_head_height, width);
+  translate([adjust_for_width, -.5*grow, -grow]) 
+    cube([diameter, width + grow, wall_height + grow]);
 }
 
 module ring_hole(cable_diameter, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter;
   grow = 2*smidge;
+  adjust_for_width = -.5*diameter;
   arch(diameter, wall_height, grow, width);
-  straight_hole(cable_diameter, width);
-}
-
-module straight_sides(cable_diameter, screw_head_height, width) {
-  wall_height = cable_diameter/2;
-  arch_width = cable_diameter + 2*screw_head_height;
-  adjust_for_width = -.5*arch_width;
-  grow = 0;
   translate([adjust_for_width, -.5*grow, -grow]) 
-    cube([arch_width, width + grow, wall_height + grow]);
-}
-
-module straight_hole(cable_diameter, width) {
-  wall_height = cable_diameter/2;
-  arch_width = cable_diameter;
-  adjust_for_width = -.5*arch_width;
-  grow = 2*smidge;
-  translate([adjust_for_width, -.5*grow, -grow]) 
-    cube([arch_width, width + grow, wall_height + grow]);
+    cube([diameter, width + grow, wall_height + grow]);
 }
 
 module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
