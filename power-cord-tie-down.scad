@@ -7,6 +7,14 @@ module arch(wall_height, diameter, grow, width, adjust_for_width) {
     cube([diameter, width + grow, wall_height + grow]);
 }
 
+module hollow_arch(cable_diameter, screw_head_height, width) {
+  difference() {
+    outer_ring(cable_diameter, screw_head_height, width);
+    ring_hole(cable_diameter, width);
+    open_bottom_of_ring(cable_diameter, screw_head_height, width);
+  }
+}
+
 module outer_ring(cable_diameter, screw_head_height, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter + (2 * screw_head_height);
@@ -29,20 +37,19 @@ module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
 }
 
 module base(cable_diameter, screw_head_height, screw_head_diameter, width) {
-  translate([-(4 * screw_head_height + cable_diameter + screw_head_diameter)/2, 0, 0]) 
-    cube([4 * screw_head_height + cable_diameter + screw_head_diameter, width, screw_head_height]);
+  difference() {
+    translate([-(4 * screw_head_height + cable_diameter + screw_head_diameter)/2, 0, 0]) 
+      cube([4 * screw_head_height + cable_diameter + screw_head_diameter, width, screw_head_height]);
+    ring_hole(cable_diameter, width);
+  }
 }
 
 module u_bracket(cable_diameter, screw_head_height, screw_head_diameter) {
   width = screw_head_diameter + 2 * screw_head_height;
-  difference() {
-    union() {
-      outer_ring(cable_diameter, screw_head_height, width);
-      base(cable_diameter, screw_head_height, screw_head_diameter, width);
-    }
-    ring_hole(cable_diameter, width);
-    open_bottom_of_ring(cable_diameter, screw_head_height, width);
+  union() {
+    hollow_arch(cable_diameter, screw_head_height, width);
+    base(cable_diameter, screw_head_height, screw_head_diameter, width);
   }
 }
 
-u_bracket(cable_diameter = 11, screw_head_height = 4, screw_head_diameter = 9);
+u_bracket(cable_diameter = 11, screw_head_height = 2, screw_head_diameter = 5);
