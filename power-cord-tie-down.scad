@@ -24,18 +24,19 @@ module ring_hole(cable_diameter, width) {
 module straight_sides(cable_diameter, screw_head_height, width) {
   wall_height = cable_diameter/2;
   arch_width = cable_diameter + 2*screw_head_height;
-  adjust_for_width = -.5 * arch_width;
-  translate([adjust_for_width, 0, 0]) 
-    cube([arch_width, width, wall_height]);
+  adjust_for_width = -.5*arch_width;
+  grow = 0;
+  translate([adjust_for_width, -.5*grow, -grow]) 
+    cube([arch_width, width + grow, wall_height + grow]);
 }
 
 module straight_hole(cable_diameter, width) {
   wall_height = cable_diameter/2;
   arch_width = cable_diameter;
-  adjust_for_width = -.5 * arch_width;
+  adjust_for_width = -.5*arch_width;
   grow = 2*smidge;
   translate([adjust_for_width, -.5*grow, -grow]) 
-    cube([arch_width, grow + width, wall_height + grow]);
+    cube([arch_width, width + grow, wall_height + grow]);
 }
 
 module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
