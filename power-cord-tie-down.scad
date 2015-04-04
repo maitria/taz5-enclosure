@@ -13,6 +13,10 @@ module entire_ring(cable_diameter, screw_head_height, width) {
   }
 }
 
+module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
+    translate([-cable_diameter/2 - screw_head_height, -0.5, -(1 + screw_head_height)]) cube([cable_diameter + 2 * screw_head_height, 1 + width, 1 + screw_head_height]);
+}
+
 module straight_sides(cable_diameter, screw_head_height, width) {
   translate([-cable_diameter/2 - screw_head_height, 0, 0]) cube([cable_diameter + 2 * screw_head_height, width, cable_diameter/2]);
 }
@@ -35,7 +39,7 @@ module u_bracket(cable_diameter, screw_head_height, screw_head_diameter) {
     }
     ring_hole(cable_diameter, screw_head_height, width);
     straight_hole(cable_diameter, width);
-    translate([-cable_diameter/2 - screw_head_height, -0.5, -(1 + screw_head_height)]) cube([cable_diameter + 2 * screw_head_height, 1 + width, 1 + screw_head_height]);
+    open_bottom_of_ring(cable_diameter, screw_head_height, width);
   }
 
 }
