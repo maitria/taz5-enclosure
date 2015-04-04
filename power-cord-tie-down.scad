@@ -10,6 +10,7 @@ module outer_ring(cable_diameter, screw_head_height, width) {
   diameter = cable_diameter + (2 * screw_head_height);
   grow = 0;
   arch(diameter, wall_height, grow, width);
+  straight_sides(cable_diameter, screw_head_height, width);
 }
 
 module ring_hole(cable_diameter, width) {
@@ -17,6 +18,7 @@ module ring_hole(cable_diameter, width) {
   diameter = cable_diameter;
   grow = 2*smidge;
   arch(diameter, wall_height, grow, width);
+  straight_hole(cable_diameter, width);
 }
 
 module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
@@ -43,16 +45,10 @@ module u_bracket(cable_diameter, screw_head_height, screw_head_diameter) {
   width = screw_head_diameter + 2 * screw_head_height;
   difference() {
     union() {
-      union() {
-        outer_ring(cable_diameter, screw_head_height, width);
-        straight_sides(cable_diameter, screw_head_height, width);
-      }
+      outer_ring(cable_diameter, screw_head_height, width);
       base(cable_diameter, screw_head_height, screw_head_diameter, width);
     }
-    union() {
-      ring_hole(cable_diameter, width);
-      straight_hole(cable_diameter, width);
-    }
+    ring_hole(cable_diameter, width);
     open_bottom_of_ring(cable_diameter, screw_head_height, width);
   }
 }
