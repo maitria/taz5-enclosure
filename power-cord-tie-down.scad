@@ -1,14 +1,18 @@
 smidge = 0.5;
 
+module arch(wall_height, diameter, grow, width, adjust_for_width) {
+  translate([0, -.5*grow, wall_height]) rotate([-90, 0, 0]) 
+    cylinder(d = diameter, h = grow + width);
+  translate([adjust_for_width, -.5*grow, -grow]) 
+    cube([diameter, width + grow, wall_height + grow]);
+}
+
 module outer_ring(cable_diameter, screw_head_height, width) {
   wall_height = cable_diameter/2;
   diameter = cable_diameter + (2 * screw_head_height);
   grow = 0;
   adjust_for_width = -.5*diameter;
-  translate([0, -.5*grow, wall_height]) rotate([-90, 0, 0]) 
-    cylinder(d = diameter, h = grow + width);
-  translate([adjust_for_width, -.5*grow, -grow]) 
-    cube([diameter, width + grow, wall_height + grow]);
+  arch(wall_height, diameter, grow, width, adjust_for_width);
 }
 
 module ring_hole(cable_diameter, width) {
@@ -16,10 +20,7 @@ module ring_hole(cable_diameter, width) {
   diameter = cable_diameter;
   grow = 2*smidge;
   adjust_for_width = -.5*diameter;
-  translate([0, -.5*grow, wall_height]) rotate([-90, 0, 0]) 
-    cylinder(d = diameter, h = grow + width);
-  translate([adjust_for_width, -.5*grow, -grow]) 
-    cube([diameter, width + grow, wall_height + grow]);
+  arch(wall_height, diameter, grow, width, adjust_for_width);
 }
 
 module open_bottom_of_ring(cable_diameter, screw_head_height, width) {
