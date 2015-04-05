@@ -31,10 +31,10 @@ module arch_waste(cable_diameter, width) {
 }
 
 module base(cable_diameter, screw_head_height, screw_head_diameter, width) {
-
+  base_extent = cable_diameter + 4 * screw_head_diameter;
   difference() {
-    translate([-(4 * screw_head_height + cable_diameter + screw_head_diameter)/2, cable_diameter/2 - screw_head_height, 0]) 
-      cube([4 * screw_head_height + cable_diameter + screw_head_diameter, screw_head_height, width]);
+    translate([-(base_extent)/2, cable_diameter/2 - screw_head_height, 0]) 
+      cube([base_extent, screw_head_height, width]);
     arch_waste(cable_diameter, width);
   }
 }
