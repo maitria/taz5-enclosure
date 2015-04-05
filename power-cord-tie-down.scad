@@ -30,19 +30,21 @@ module arch_waste(cable_diameter, width) {
     arch(cable_diameter/2, cable_diameter, 2 * smidge, width);
 }
 
-module base(cable_diameter, screw_head_height, screw_head_diameter, width) {
+module base(cable_diameter, thickness, screw_head_diameter, width) {
   base_extent = cable_diameter + 4 * screw_head_diameter;
   difference() {
-    translate([-(base_extent)/2, cable_diameter/2 - screw_head_height, 0]) 
-      cube([base_extent, screw_head_height, width]);
+    translate([-(base_extent)/2, cable_diameter/2 - thickness, 0]) 
+      cube([base_extent, thickness, width]);
     arch_waste(cable_diameter, width);
   }
 }
 
 module u_bracket(cable_diameter, screw_head_height, screw_head_diameter) {
+  thickness = screw_head_height;
   width = 2 * screw_head_diameter;
+  left_base(screw_head_diameter, thickness, width);
   union() {
-    hollow_arch(cable_diameter, screw_head_height, width);
+    hollow_arch(cable_diameter, thickness, width);
     base(cable_diameter, screw_head_height, screw_head_diameter, width);
   }
 }
