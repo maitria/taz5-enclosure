@@ -4,7 +4,8 @@ module cylinder_part_of_arch(diameter, grow, width) {
   translate([0, 0, -.5*grow])
     intersection() {
       cylinder(d = diameter, h = grow + width);
-      translate([-.5*diameter, -.5*diameter, 0]) cube([diameter, diameter/2+smidge, width+2*smidge]);
+      translate([-.5*diameter, -.5*diameter, 0]) 
+        cube([diameter, diameter/2+smidge, width+2*smidge]);
     }
 }
 
@@ -30,6 +31,7 @@ module arch_waste(cable_diameter, width) {
 }
 
 module base(cable_diameter, screw_head_height, screw_head_diameter, width) {
+
   difference() {
     translate([-(4 * screw_head_height + cable_diameter + screw_head_diameter)/2, cable_diameter/2 - screw_head_height, 0]) 
       cube([4 * screw_head_height + cable_diameter + screw_head_diameter, screw_head_height, width]);
@@ -38,7 +40,7 @@ module base(cable_diameter, screw_head_height, screw_head_diameter, width) {
 }
 
 module u_bracket(cable_diameter, screw_head_height, screw_head_diameter) {
-  width = screw_head_diameter + 2 * screw_head_height;
+  width = 2 * screw_head_diameter;
   union() {
     hollow_arch(cable_diameter, screw_head_height, width);
     base(cable_diameter, screw_head_height, screw_head_diameter, width);
