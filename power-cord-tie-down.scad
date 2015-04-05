@@ -19,9 +19,9 @@ module arch(wall_height, diameter, grow, width) {
   straight_sides_of_arch(wall_height, diameter, grow, width);
 }
 
-module hollow_arch(cable_diameter, screw_head_height, width) {
+module hollow_arch(cable_diameter, thickness, width) {
   difference() {
-    arch(cable_diameter/2, cable_diameter + (2 * screw_head_height), 0, width);
+    arch(cable_diameter/2, cable_diameter + (2 * thickness), 0, width);
     arch(cable_diameter/2, cable_diameter, 2 * smidge, width);
   }
 }
