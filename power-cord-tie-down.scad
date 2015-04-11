@@ -27,9 +27,7 @@ module hollow_arch(cable_diameter, thickness, width) {
 }
 
 module arch_waste(dimensions) {
-    cable_diameter = cable_diameter(dimensions);
-    width = width(dimensions);
-    arch(cable_diameter/2, cable_diameter, 2 * smidge, width);
+    arch(cable_diameter(dimensions)/2, cable_diameter(dimensions), 2 * smidge, width(dimensions));
 }
 
 module base(cable_diameter, thickness, screw_head_diameter, width, dimensions) {
