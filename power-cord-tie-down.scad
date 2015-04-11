@@ -39,14 +39,18 @@ module base(cable_diameter, thickness, screw_head_diameter, width) {
   }
 }
 
-module u_bracket(cable_diameter, screw_head_height, screw_head_diameter) {
-  thickness = screw_head_height;
-  width = 2 * screw_head_diameter;
-  left_base(screw_head_diameter, thickness, width);
+function thickness(dimensions) = dimensions[1];
+function screw_head_diameter(dimensions) = dimensions[2];
+function width(dimensions) = 2 * screw_head_diameter(dimensions);
+function cable_diameter(dimensions) = dimensions[0];
+
+module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
+  dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
+  left_base(screw_head_diameter(dimensions), thickness(dimensions), width(dimensions));
   union() {
-    hollow_arch(cable_diameter, thickness, width);
-    base(cable_diameter, screw_head_height, screw_head_diameter, width);
+    hollow_arch(cable_diameter(dimensions), thickness(dimensions), width(dimensions));
+    base(cable_diameter, screw_head_height, screw_head_diameter, width(dimensions));
   }
 }
 
-u_bracket(cable_diameter = 11, screw_head_height = 2, screw_head_diameter = 5);
+tie_down(cable_diameter = 11, screw_head_height = 2, screw_head_diameter = 5);
