@@ -27,7 +27,7 @@ module hollow_arch(cable_diameter, thickness, width) {
 }
 
 module arch_waste(dimensions) {
-    arch(cable_diameter(dimensions)/2, cable_diameter(dimensions), 2 * smidge, width(dimensions));
+    arch(wall_height(dimensions), cable_diameter(dimensions), 2 * smidge, width(dimensions));
 }
 
 module base(cable_diameter, thickness, screw_head_diameter, width, dimensions) {
@@ -43,6 +43,7 @@ function thickness(dimensions) = dimensions[1];
 function screw_head_diameter(dimensions) = dimensions[2];
 function width(dimensions) = 2 * screw_head_diameter(dimensions);
 function cable_diameter(dimensions) = dimensions[0];
+function wall_height(dimensions) = cable_diameter(dimensions)/2;
 
 module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
