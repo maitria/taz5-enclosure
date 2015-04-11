@@ -26,16 +26,18 @@ module hollow_arch(cable_diameter, thickness, width) {
   }
 }
 
-module arch_waste(cable_diameter, width) {
+module arch_waste(dimensions) {
+    cable_diameter = cable_diameter(dimensions);
+    width = width(dimensions);
     arch(cable_diameter/2, cable_diameter, 2 * smidge, width);
 }
 
-module base(cable_diameter, thickness, screw_head_diameter, width) {
+module base(cable_diameter, thickness, screw_head_diameter, width, dimensions) {
   base_extent = cable_diameter + 4 * screw_head_diameter;
   difference() {
     translate([-(base_extent)/2, cable_diameter/2 - thickness, 0]) 
       cube([base_extent, thickness, width]);
-    arch_waste(cable_diameter, width);
+    arch_waste(dimensions);
   }
 }
 
@@ -49,7 +51,7 @@ module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   left_base(screw_head_diameter(dimensions), thickness(dimensions), width(dimensions));
   union() {
     hollow_arch(cable_diameter(dimensions), thickness(dimensions), width(dimensions));
-    base(cable_diameter, screw_head_height, screw_head_diameter, width(dimensions));
+    base(cable_diameter, screw_head_height, screw_head_diameter, width(dimensions), dimensions);
   }
 }
 
