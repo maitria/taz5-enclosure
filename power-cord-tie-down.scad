@@ -38,7 +38,7 @@ module tunnel(dimensions) {
 }
 
 module base(dimensions) {
-  base_extent = tunnel_outside_diameter(dimensions) + 4 * screw_head_diameter(dimensions);
+  base_extent = tunnel_outside_diameter(dimensions) + 4 * thickness(dimensions) + 2 * screw_head_diameter(dimensions);
   difference() {
     translate([-base_extent/2, cable_diameter(dimensions)/2 - thickness(dimensions), 0]) 
       cube([base_extent, thickness(dimensions), width(dimensions)]);
