@@ -21,7 +21,7 @@ module arch(dimensions) {
   straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
 }
 
-module arch_waste(dimensions) {
+module tunnel_hole(dimensions) {
   grow = 2 * smidge;
   diameter = cable_diameter(dimensions);
   cylinder_part_of_arch(diameter, grow, width(dimensions));
@@ -31,7 +31,7 @@ module arch_waste(dimensions) {
 module tunnel(dimensions) {
   difference() {
     arch(dimensions);
-    arch_waste(dimensions);
+    tunnel_hole(dimensions);
   }
 }
 
@@ -40,7 +40,7 @@ module base(dimensions) {
   difference() {
     translate([-base_extent/2, cable_diameter(dimensions)/2 - thickness(dimensions), 0]) 
       cube([base_extent, thickness(dimensions), width(dimensions)]);
-    arch_waste(dimensions);
+    tunnel_hole(dimensions);
   }
 }
 
