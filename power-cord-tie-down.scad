@@ -19,10 +19,10 @@ module arch(wall_height, diameter, grow, width) {
   straight_sides_of_arch(wall_height, diameter, grow, width);
 }
 
-module hollow_arch(cable_diameter, thickness, width) {
+module hollow_arch(dimensions) {
   difference() {
-    arch(cable_diameter/2, cable_diameter + (2 * thickness), 0, width);
-    arch(cable_diameter/2, cable_diameter, 2 * smidge, width);
+    arch(cable_diameter(dimensions)/2, cable_diameter(dimensions) + (2 * thickness(dimensions)), 0, width(dimensions));
+    arch(cable_diameter(dimensions)/2, cable_diameter(dimensions), 2 * smidge, width(dimensions));
   }
 }
 
@@ -48,7 +48,7 @@ function wall_height(dimensions) = cable_diameter(dimensions)/2;
 module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
   union() {
-    hollow_arch(cable_diameter(dimensions), thickness(dimensions), width(dimensions));
+    hollow_arch(dimensions);
     base(cable_diameter, screw_head_height, screw_head_diameter, width(dimensions), dimensions);
   }
 }
