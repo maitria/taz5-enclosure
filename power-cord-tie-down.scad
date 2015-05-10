@@ -67,4 +67,4 @@ module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   }
 }
 
-tie_down(cable_diameter = 11, screw_head_height = 2, screw_head_diameter = 5);
+tie_down(cable_diameter = 11, screw_head_height = 4, screw_head_diameter = 9.5);
