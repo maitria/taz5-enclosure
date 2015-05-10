@@ -14,20 +14,20 @@ module straight_sides_of_arch(wall_height, diameter, grow, width) {
     cube([diameter, wall_height + grow, width + grow]);
 }
 
-module arch(dimensions, wall_height, diameter, grow, width) {
-  cylinder_part_of_arch(diameter, grow, width);
-  straight_sides_of_arch(wall_height, diameter, grow, width);
+module arch(dimensions, wall_height, diameter, grow) {
+  cylinder_part_of_arch(diameter, grow, width(dimensions));
+  straight_sides_of_arch(wall_height, diameter, grow, width(dimensions));
 }
 
 module hollow_arch(dimensions) {
   difference() {
-    arch(dimensions, cable_diameter(dimensions)/2, cable_diameter(dimensions) + (2 * thickness(dimensions)), 0, width(dimensions));
-    arch(dimensions, cable_diameter(dimensions)/2, cable_diameter(dimensions), 2 * smidge, width(dimensions));
+    arch(dimensions, wall_height(dimensions), cable_diameter(dimensions) + (2 * thickness(dimensions)), 0);
+    arch(dimensions, wall_height(dimensions), cable_diameter(dimensions), 2 * smidge);
   }
 }
 
 module arch_waste(dimensions) {
-  arch(dimensions, wall_height(dimensions), cable_diameter(dimensions), 2 * smidge, width(dimensions));
+  arch(dimensions, wall_height(dimensions), cable_diameter(dimensions), 2 * smidge);
 }
 
 module base(dimensions) {
