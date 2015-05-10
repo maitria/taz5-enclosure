@@ -40,6 +40,7 @@ module base(cable_diameter, thickness, screw_head_diameter, width, dimensions) {
 }
 
 function thickness(dimensions) = dimensions[1];
+function screw_head_height(dimensions) = thickness(dimensions);
 function screw_head_diameter(dimensions) = dimensions[2];
 function width(dimensions) = 2 * screw_head_diameter(dimensions);
 function cable_diameter(dimensions) = dimensions[0];
@@ -49,7 +50,7 @@ module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
   union() {
     hollow_arch(dimensions);
-    base(cable_diameter, screw_head_height, screw_head_diameter, width(dimensions), dimensions);
+    base(cable_diameter(dimensions), screw_head_height(dimensions), screw_head_diameter(dimensions), width(dimensions), dimensions);
   }
 }
 
