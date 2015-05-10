@@ -37,10 +37,14 @@ module tunnel(dimensions) {
   }
 }
 
+module base_plate(dimensions) {
+  translate([-base_extent(dimensions)/2, cable_diameter(dimensions)/2 - thickness(dimensions), 0]) 
+    cube([base_extent(dimensions), thickness(dimensions), width(dimensions)]);
+}
+
 module base(dimensions) {
   difference() {
-    translate([-base_extent(dimensions)/2, cable_diameter(dimensions)/2 - thickness(dimensions), 0]) 
-      cube([base_extent(dimensions), thickness(dimensions), width(dimensions)]);
+    base_plate(dimensions);
     tunnel_hole(dimensions);
   }
 }
