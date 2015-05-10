@@ -14,8 +14,9 @@ module straight_sides_of_arch(wall_height, diameter, grow, width) {
     cube([diameter, wall_height + grow, width + grow]);
 }
 
-module arch(dimensions, diameter) {
+module arch(dimensions) {
   grow = 0;
+  diameter = cable_diameter(dimensions) + (2 * thickness(dimensions));
   cylinder_part_of_arch(diameter, grow, width(dimensions));
   straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
 }
@@ -29,7 +30,7 @@ module arch_waste(dimensions) {
 
 module tunnel(dimensions) {
   difference() {
-    arch(dimensions, cable_diameter(dimensions) + (2 * thickness(dimensions)));
+    arch(dimensions);
     arch_waste(dimensions);
   }
 }
