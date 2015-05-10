@@ -19,15 +19,15 @@ module arch(dimensions, diameter, grow) {
   straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
 }
 
+module arch_waste(dimensions) {
+  arch(dimensions, cable_diameter(dimensions), 2 * smidge);
+}
+
 module tunnel(dimensions) {
   difference() {
     arch(dimensions, cable_diameter(dimensions) + (2 * thickness(dimensions)), 0);
     arch_waste(dimensions);
   }
-}
-
-module arch_waste(dimensions) {
-  arch(dimensions, cable_diameter(dimensions), 2 * smidge);
 }
 
 module base(dimensions) {
