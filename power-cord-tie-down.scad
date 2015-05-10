@@ -14,18 +14,21 @@ module straight_sides_of_arch(wall_height, diameter, grow, width) {
     cube([diameter, wall_height + grow, width + grow]);
 }
 
+module arch(dimensions, diameter, grow) {
+  cylinder_part_of_arch(diameter, grow, width(dimensions));
+  straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
+}
+
 module tunnel_substance(dimensions) {
   grow = 0;
   diameter = cable_diameter(dimensions) + (2 * thickness(dimensions));
-  cylinder_part_of_arch(diameter, grow, width(dimensions));
-  straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
+  arch(dimensions, diameter, grow);
 }
 
 module tunnel_hole(dimensions) {
   grow = 2 * smidge;
   diameter = cable_diameter(dimensions);
-  cylinder_part_of_arch(diameter, grow, width(dimensions));
-  straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
+  arch(dimensions, diameter, grow);
 }
 
 module tunnel(dimensions) {
