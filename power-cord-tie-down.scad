@@ -30,11 +30,11 @@ module arch_waste(dimensions) {
   arch(wall_height(dimensions), cable_diameter(dimensions), 2 * smidge, width(dimensions));
 }
 
-module base(cable_diameter, thickness, screw_head_diameter, width, dimensions) {
-  base_extent = cable_diameter + 4 * screw_head_diameter;
+module base(dimensions) {
+  base_extent = cable_diameter(dimensions) + 4 * screw_head_diameter(dimensions);
   difference() {
-    translate([-(base_extent)/2, cable_diameter/2 - thickness, 0]) 
-      cube([base_extent, thickness, width]);
+    translate([-base_extent/2, cable_diameter(dimensions)/2 - thickness(dimensions), 0]) 
+      cube([base_extent, thickness(dimensions), width(dimensions)]);
     arch_waste(dimensions);
   }
 }
@@ -50,7 +50,7 @@ module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
   union() {
     hollow_arch(dimensions);
-    base(cable_diameter(dimensions), screw_head_height(dimensions), screw_head_diameter(dimensions), width(dimensions), dimensions);
+    base(dimensions);
   }
 }
 
