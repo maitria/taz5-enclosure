@@ -38,7 +38,7 @@ module tunnel(dimensions) {
 }
 
 module base(dimensions) {
-  base_extent = cable_diameter(dimensions) + 4 * screw_head_diameter(dimensions);
+  base_extent = cable_diameter(dimensions) + 2 * thickness(dimensions) + 4 * screw_head_diameter(dimensions);
   difference() {
     translate([-base_extent/2, cable_diameter(dimensions)/2 - thickness(dimensions), 0]) 
       cube([base_extent, thickness(dimensions), width(dimensions)]);
@@ -46,12 +46,12 @@ module base(dimensions) {
   }
 }
 
-function thickness(dimensions) = dimensions[1];
-function screw_head_height(dimensions) = thickness(dimensions);
-function screw_head_diameter(dimensions) = dimensions[2];
-function width(dimensions) = 2 * screw_head_diameter(dimensions);
 function cable_diameter(dimensions) = dimensions[0];
 function wall_height(dimensions) = cable_diameter(dimensions)/2;
+function screw_head_height(dimensions) = dimensions[1];
+function thickness(dimensions) = screw_head_height(dimensions);
+function screw_head_diameter(dimensions) = dimensions[2];
+function width(dimensions) = 2 * screw_head_diameter(dimensions);
 
 module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
