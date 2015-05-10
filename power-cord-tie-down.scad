@@ -47,7 +47,6 @@ function wall_height(dimensions) = cable_diameter(dimensions)/2;
 
 module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
-  left_base(screw_head_diameter(dimensions), thickness(dimensions), width(dimensions));
   union() {
     hollow_arch(cable_diameter(dimensions), thickness(dimensions), width(dimensions));
     base(cable_diameter, screw_head_height, screw_head_diameter, width(dimensions), dimensions);
