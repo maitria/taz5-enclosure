@@ -19,7 +19,7 @@ module arch(dimensions, diameter, grow) {
   straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
 }
 
-module hollow_arch(dimensions) {
+module tunnel(dimensions) {
   difference() {
     arch(dimensions, cable_diameter(dimensions) + (2 * thickness(dimensions)), 0);
     arch_waste(dimensions);
@@ -49,7 +49,7 @@ function wall_height(dimensions) = cable_diameter(dimensions)/2;
 module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
   union() {
-    hollow_arch(dimensions);
+    tunnel(dimensions);
     base(dimensions);
   }
 }
