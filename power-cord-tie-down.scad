@@ -1,3 +1,5 @@
+include <screws.scad>;
+
 smidge = 0.5;
 
 module cylinder_part_of_arch(diameter, grow, width) {
@@ -42,10 +44,19 @@ module base_plate(dimensions) {
     cube([base_extent(dimensions), thickness(dimensions), width(dimensions)]);
 }
 
+module specific_screw_hole(dimensions) {
+  translate([0.5*base_extent(dimensions) - screw_padding(dimensions) - screw_head_diameter(dimensions)/2, 0, width(dimensions)/2]) {
+    rotate([-90, 0, 0]) {
+      screw_hole(4.75, screw_head_diameter(dimensions), screw_head_height(dimensions));
+    }
+  }
+}
+
 module base(dimensions) {
   difference() {
     base_plate(dimensions);
     tunnel_hole(dimensions);
+    specific_screw_hole(dimensions);
   }
 }
 
