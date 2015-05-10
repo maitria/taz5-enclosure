@@ -8,8 +8,8 @@ function screw_shank_diameter(dimensions) = dimensions[3];
 
 function wall_height(dimensions) = cable_diameter(dimensions)/2;
 function thickness(dimensions) = screw_head_height(dimensions);
-function screw_padding(dimensions) = thickness(dimensions);
-function width(dimensions) = 2 * screw_head_diameter(dimensions);
+function screw_padding(dimensions) = 2;
+function width(dimensions) = screw_head_diameter(dimensions) + 2 * screw_padding(dimensions);
 function tunnel_outside_diameter(dimensions) = cable_diameter(dimensions) + 2 * thickness(dimensions);
 function base_extent(dimensions) = tunnel_outside_diameter(dimensions) + 4 * screw_padding(dimensions) + 2 * screw_head_diameter(dimensions);
 
