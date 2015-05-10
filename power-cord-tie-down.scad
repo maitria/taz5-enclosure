@@ -22,7 +22,7 @@ module arch(dimensions, diameter, grow) {
 module hollow_arch(dimensions) {
   difference() {
     arch(dimensions, cable_diameter(dimensions) + (2 * thickness(dimensions)), 0);
-    arch(dimensions, cable_diameter(dimensions), 2 * smidge);
+    arch_waste(dimensions);
   }
 }
 
