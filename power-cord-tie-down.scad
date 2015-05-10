@@ -53,10 +53,11 @@ function cable_diameter(dimensions) = dimensions[0];
 function wall_height(dimensions) = cable_diameter(dimensions)/2;
 function screw_head_height(dimensions) = dimensions[1];
 function thickness(dimensions) = screw_head_height(dimensions);
+function screw_padding(dimensions) = thickness(dimensions);
 function screw_head_diameter(dimensions) = dimensions[2];
 function width(dimensions) = 2 * screw_head_diameter(dimensions);
 function tunnel_outside_diameter(dimensions) = cable_diameter(dimensions) + 2 * thickness(dimensions);
-function base_extent(dimensions) = tunnel_outside_diameter(dimensions) + 4 * thickness(dimensions) + 2 * screw_head_diameter(dimensions);
+function base_extent(dimensions) = tunnel_outside_diameter(dimensions) + 4 * screw_padding(dimensions) + 2 * screw_head_diameter(dimensions);
 
 module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
   dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
