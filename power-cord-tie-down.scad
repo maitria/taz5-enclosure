@@ -55,13 +55,17 @@ module base_plate(dimensions) {
     cube([base_extent(dimensions), thickness(dimensions), width(dimensions)]);
 }
 
+function screw_position(dimensions, direction) 
+  = direction * (0.5*base_extent(dimensions) - (screw_padding(dimensions) + screw_head_diameter(dimensions)/2));
+
 module tiedown_screw_hole(dimensions, direction) {
-  translate([direction * (0.5*base_extent(dimensions) - (screw_padding(dimensions) + screw_head_diameter(dimensions)/2)), 0, width(dimensions)/2]) {
+  translate([screw_position(dimensions, direction), 0, width(dimensions)/2]) {
     rotate([-90, 0, 0]) {
       screw_hole(screw_shank_diameter(dimensions), screw_head_diameter(dimensions), screw_head_height(dimensions));
     }
   }
 }
+
 module base(dimensions) {
   difference() {
     base_plate(dimensions);
