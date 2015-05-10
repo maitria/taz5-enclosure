@@ -20,7 +20,10 @@ module arch(dimensions, diameter, grow) {
 }
 
 module arch_waste(dimensions) {
-  arch(dimensions, cable_diameter(dimensions), 2 * smidge);
+  grow = 2 * smidge;
+  diameter = cable_diameter(dimensions);
+  cylinder_part_of_arch(diameter, grow, width(dimensions));
+  straight_sides_of_arch(wall_height(dimensions), diameter, grow, width(dimensions));
 }
 
 module tunnel(dimensions) {
