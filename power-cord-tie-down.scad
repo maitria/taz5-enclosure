@@ -44,10 +44,10 @@ module base_plate(dimensions) {
     cube([base_extent(dimensions), thickness(dimensions), width(dimensions)]);
 }
 
-module specific_screw_hole(dimensions) {
+module right_screw_hole(dimensions) {
   translate([0.5*base_extent(dimensions) - screw_padding(dimensions) - screw_head_diameter(dimensions)/2, 0, width(dimensions)/2]) {
     rotate([-90, 0, 0]) {
-      screw_hole(4.75, screw_head_diameter(dimensions), screw_head_height(dimensions));
+      screw_hole(screw_shank_diameter(dimensions), screw_head_diameter(dimensions), screw_head_height(dimensions));
     }
   }
 }
@@ -56,7 +56,7 @@ module base(dimensions) {
   difference() {
     base_plate(dimensions);
     tunnel_hole(dimensions);
-    specific_screw_hole(dimensions);
+    right_screw_hole(dimensions);
   }
 }
 
@@ -69,13 +69,14 @@ function screw_head_diameter(dimensions) = dimensions[2];
 function width(dimensions) = 2 * screw_head_diameter(dimensions);
 function tunnel_outside_diameter(dimensions) = cable_diameter(dimensions) + 2 * thickness(dimensions);
 function base_extent(dimensions) = tunnel_outside_diameter(dimensions) + 4 * screw_padding(dimensions) + 2 * screw_head_diameter(dimensions);
+function screw_shank_diameter(dimensions) = dimensions[3];
 
-module tie_down(cable_diameter, screw_head_height, screw_head_diameter) {
-  dimensions = [cable_diameter, screw_head_height, screw_head_diameter];
+module tie_down(cable_diameter, screw_head_height, screw_head_diameter, screw_shank_diameter) {
+  dimensions = [cable_diameter, screw_head_height, screw_head_diameter, screw_shank_diameter];
   union() {
     tunnel(dimensions);
     base(dimensions);
   }
 }
 
-tie_down(cable_diameter = 11, screw_head_height = 4, screw_head_diameter = 9.5);
+tie_down(cable_diameter = 11, screw_head_height = 4, screw_head_diameter = 9.5, screw_shank_diameter = 4.75);
