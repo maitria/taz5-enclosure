@@ -1,6 +1,7 @@
 include <screws.scad>;
 
-smidge = 0.5;
+smidge = 0.01;
+
 function cable_diameter(dimensions) = dimensions[0];
 function screw_head_height(dimensions) = dimensions[1];
 function screw_head_diameter(dimensions) = dimensions[2];
@@ -59,7 +60,7 @@ function screw_position(dimensions, direction)
   = direction * (0.5*base_extent(dimensions) - (screw_padding(dimensions) + screw_head_diameter(dimensions)/2));
 
 module tiedown_screw_hole(dimensions, direction) {
-  translate([screw_position(dimensions, direction), 0, width(dimensions)/2]) {
+  translate([screw_position(dimensions, direction), cable_diameter(dimensions)/2 - thickness(dimensions) - smidge, width(dimensions)/2]) {
     rotate([-90, 0, 0]) {
       screw_hole(screw_shank_diameter(dimensions), screw_head_diameter(dimensions), screw_head_height(dimensions));
     }
