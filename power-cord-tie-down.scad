@@ -84,4 +84,4 @@ module tie_down(cable_diameter, screw_head_height, screw_head_diameter, screw_sh
   }
 }
 
-tie_down(cable_diameter = 11, screw_head_height = 4, screw_head_diameter = 9.5, screw_shank_diameter = 4.75);
+tie_down(cable_diameter = 11, screw_head_height = 4, screw_head_diameter = 9.5, screw_shank_diameter = 4.9);
